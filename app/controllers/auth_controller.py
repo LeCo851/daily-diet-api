@@ -16,7 +16,7 @@ def register():
     
     json_data = request.get_json()
     if not json_data:
-        return jsonify({'erro': "Nenhum dado enviado"})
+        return jsonify({'erro': "Nenhum dado enviado"}), 400
     
     try:
         validated_data = user_schema.load(json_data)
