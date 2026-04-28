@@ -8,7 +8,7 @@ class MealService:
     """
     
     @staticmethod
-    def create_meal(data):
+    def create_meal(data,user_id):
         """
         Cria uma nova refeição no banco de dados
         :param data: Dicionário contendo os dados validados pelo Schema
@@ -18,7 +18,8 @@ class MealService:
             name = data['name'],
             description=data['description'],
             is_on_diet=data['is_on_diet'],
-            date_time=data.get('date_time')
+            date_time=data.get('date_time'),
+            user_id=user_id
         )
         
         db.session.add(new_meal)
@@ -27,30 +28,30 @@ class MealService:
         return new_meal
     
     @staticmethod
-    def get_all_meals():
+    def get_all_meals(user_id):
         """
         Retorna todas as refeições do banco de dados
         """
         
-        return Meal.query.all()
+        return Meal.query.filter_by(user_id = user_id).all()
     
 
     @staticmethod
-    def get_meal_by_id(meal_id):
+    def get_meal_by_id(meal_id,user_id):
         """
         Busca refeiçao por ID
         """
         
-        return Meal.query.get(meal_id)
+        return Meal.query.filter_by(id=meal_id, user_id=user_id).first()
     
     @staticmethod
-    def update_meal(meal_id, data):
+    def update_meal(meal_id, user_id,data):
         """
         Atualiza uma refeição no banco de dados
         :param meal_id: ID da refeição a ser atualizada
         """
         
-        meal = Meal.query.get(meal_id)
+        meal = Meal.query.filter_by(id=meal_id, user_id=user_id).first()
         
         if not meal:
             return None
@@ -67,13 +68,13 @@ class MealService:
         return meal
 
     @staticmethod
-    def delete_meal(meal_id):
+    def delete_meal(meal_id, user_id):
         """
         Deleta uma refeição do banco de dados
-        :param meal_id: ID da refeição a ser deletada)
+        :param meal_id: ID da refeição a ser deletada
         """
         
-        meal = Meal.query.get(meal_id)
+        meal = Meal.query.filter_by(id=meal_id, user_id=user_id).first()
         
         if not meal:
             return False

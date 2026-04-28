@@ -19,10 +19,13 @@ class Meal(db.Model):
     
     is_on_diet = db.Column(db.Boolean, nullable=False)
     
-    def __init__(self, name, description, date_time, is_on_diet):
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
+    
+    def __init__(self, name, description, date_time, is_on_diet, user_id):
         self.name = name
         self.description = description
         self.is_on_diet = is_on_diet
+        self.user_id = user_id
         if date_time:
             self.date_time = date_time
     
