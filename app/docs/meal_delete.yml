@@ -1,0 +1,16 @@
+tags:
+  - Refeições
+summary: "Exclui uma refeição do sistema"
+parameters:
+  - name: meal_id
+    in: path
+    type: integer
+    required: true
+    description: "ID numérico da refeição a ser excluída"
+responses:
+  204:
+    description: "Refeição removida com sucesso (sem conteúdo no corpo da resposta)"
+  401:
+    description: "Não autorizado"
+  404:
+    description: "Refeição não encontrada ou não pertence ao usuário logado"

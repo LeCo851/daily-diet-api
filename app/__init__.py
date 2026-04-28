@@ -5,6 +5,7 @@ import os
 from app.controllers.meal_controller import meal_bp
 from app.controllers.auth_controller import auth_bp
 from app.services.user_service import UserService
+from flasgger import Swagger
 
 load_dotenv()
 
@@ -23,6 +24,13 @@ def create_app():
     if not database_url:
         raise ValueError("Variável de ambiente não configurada")
     
+    app.config['SWAGGER'] = {
+        'title' : 'Daily Diet API',
+        'uiversion': 3,
+        'description': 'API RESTful para controle de dieta diária'
+    }
+  
+    
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.register_blueprint(auth_bp)
@@ -30,9 +38,13 @@ def create_app():
     bcrypt.init_app(app)
     login_manager.init_app(app)
     
+    Swagger(app)
+    
     @login_manager.user_loader
     def load_user(user_id):
         return UserService.get_user_by_id(int(user_id))
+    
+  
     
     db.init_app(app)
     with app.app_context():

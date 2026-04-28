@@ -1,0 +1,8 @@
+tags:
+  - Refeições
+summary: "Lista todas as refeições do usuário logado"
+responses:
+  200:
+    description: "Lista de refeições retornada"
+  401:
+    description: "Não autorizado"

@@ -3,11 +3,13 @@ from marshmallow import ValidationError
 from app.schemas.meal_schema import meal_schema, meals_schema
 from app.services.meal_service import MealService
 from flask_login import login_required, current_user
+from flasgger import swag_from
 
 meal_bp = Blueprint('meal_bp', __name__, url_prefix='/meals')
 
 @meal_bp.route('/', methods=['POST'])
 @login_required
+@swag_from('../docs/meal_create.yml')
 def create_meal():
     """
     Endpoint para criar uma nova refeição
@@ -31,6 +33,7 @@ def create_meal():
     
 @meal_bp.route('/', methods=['GET'])
 @login_required
+@swag_from('../docs/meal_list.yml')
 def list_meals():
     """
     Endpoint para listar todas as refeições
@@ -44,6 +47,7 @@ def list_meals():
 
 @meal_bp.route('/<int:meal_id>', methods=['GET'])
 @login_required
+@swag_from('../docs/meal_get.yml')
 def list_meals_by_id(meal_id):
     """
     Endpoint para listar refeiçao por id
@@ -61,6 +65,7 @@ def list_meals_by_id(meal_id):
 
 @meal_bp.route('/<int:meal_id>', methods=['PUT'])
 @login_required
+@swag_from('../docs/meal_update.yml')
 def update_meal(meal_id):
     """
     Endpoint para atualizar todos os dados de uma refeição
@@ -85,6 +90,7 @@ def update_meal(meal_id):
     
 @meal_bp.route('/<int:meal_id>', methods=['DELETE'])
 @login_required
+@swag_from('../docs/meal_delete.yml')
 def delete_meal(meal_id):
     """
     Endpoint para deletar uma refeição

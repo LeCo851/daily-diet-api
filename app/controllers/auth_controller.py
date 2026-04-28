@@ -3,10 +3,12 @@ from marshmallow import ValidationError
 from flask_login import login_user, logout_user, login_required
 from app.schemas.user_schema import user_schema
 from app.services.user_service import UserService
+from flasgger import swag_from
 
 auth_bp = Blueprint('auth_bp', __name__, url_prefix='/auth')
 
 @auth_bp.route('/register', methods=['POST'])
+@swag_from('../docs/auth_register.yml')
 def register():
     """
     Endpoin para criar nova conta de usuário
@@ -32,6 +34,7 @@ def register():
         return jsonify({"erro": str(err)}),400
     
 @auth_bp.route('/login', methods=['POST'])
+@swag_from('../docs/auth_login.yml')
 def login():
         """
         Endpoint para autenticar o usuário e inicar a sessao
@@ -51,6 +54,7 @@ def login():
         
 @auth_bp.route('/logout', methods=['POST'])
 @login_required
+@swag_from('../docs/auth_logout.yml')
 def logout():
     """
     Endpoint para encerrar a sessao do usuario

@@ -1,0 +1,16 @@
+tags:
+  - Refeições
+summary: "Busca uma refeição específica pelo ID"
+parameters:
+  - name: meal_id
+    in: path
+    type: integer
+    required: true
+    description: "ID numérico da refeição"
+responses:
+  200:
+    description: "Refeição encontrada e retornada com sucesso"
+  401:
+    description: "Não autorizado (Sessão inválida ou expirada)"
+  404:
+    description: "Refeição não encontrada ou não pertence ao usuário logado"

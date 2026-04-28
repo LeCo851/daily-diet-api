@@ -1,0 +1,30 @@
+tags:
+  - Refeições
+summary: "Atualiza todos os dados de uma refeição"
+parameters:
+  - name: meal_id
+    in: path
+    type: integer
+    required: true
+    description: "ID numérico da refeição a ser atualizada"
+  - in: body
+    name: body
+    required: true
+    description: "Novos dados para substituição"
+    schema:
+      type: object
+      required: [name, description, is_on_diet]
+      properties:
+        name: {type: string, example: "Jantar Reforçado"}
+        description: {type: string, example: "Macarrão integral com carne moída"}
+        is_on_diet: {type: boolean, example: true}
+        date_time: {type: string, example: "2026-04-28 20:30:00"}
+responses:
+  200:
+    description: "Refeição atualizada com sucesso"
+  400:
+    description: "Erro de validação (Ex: faltou algum campo obrigatório)"
+  401:
+    description: "Não autorizado"
+  404:
+    description: "Refeição não encontrada ou não pertence ao usuário logado"

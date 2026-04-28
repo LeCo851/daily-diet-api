@@ -1,0 +1,8 @@
+tags:
+  - Autenticação
+summary: "Encerra a sessão atual do usuário logado"
+responses:
+  200:
+    description: "Logout realizado com sucesso. O cookie da sessão foi destruído."
+  401:
+    description: "Não autorizado (Nenhum usuário logado no momento)"

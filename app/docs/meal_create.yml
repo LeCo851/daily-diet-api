@@ -1,0 +1,22 @@
+tags:
+  - Refeições
+summary: "Cria uma nova refeição"
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      required: [name, description, is_on_diet]
+      properties:
+        name: {type: string, example: "Almoço Saudável"}
+        description: {type: string, example: "Frango com salada"}
+        is_on_diet: {type: boolean, example: true}
+        date_time: {type: string, example: "2026-04-28 12:00:00"}
+responses:
+  201:
+    description: "Refeição criada com sucesso"
+  400:
+    description: "Erro de validação"
+  401:
+    description: "Não autorizado"

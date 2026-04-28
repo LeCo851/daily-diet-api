@@ -1,0 +1,21 @@
+tags:
+  - Autenticação
+summary: "Realiza o login e inicia a sessão via Cookie"
+parameters:
+  - in: body
+    name: body
+    required: true
+    description: "Credenciais de acesso"
+    schema:
+      type: object
+      required: [email, password]
+      properties:
+        email: {type: string, example: "leandro@exemplo.com"}
+        password: {type: string, example: "senha123"}
+responses:
+  200:
+    description: "Login realizado com sucesso. O navegador salvará o cookie da sessão."
+  400:
+    description: "Requisição mal formatada (Ex: falta de email ou senha)"
+  401:
+    description: "Credenciais inválidas (E-mail não encontrado ou senha incorreta)"
