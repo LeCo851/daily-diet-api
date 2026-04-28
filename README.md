@@ -41,6 +41,8 @@ Siga os passos abaixo para configurar e rodar o projeto no seu ambiente:
 ### Pré-requisitos
 *   Python 3.x instalado.
 *   Gerenciador de pacotes `pip`.
+*   Docker instalado.
+
 
 ### Passos para Instalação
 
